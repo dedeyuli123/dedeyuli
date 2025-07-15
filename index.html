@@ -4,8 +4,27 @@
   <meta charset="UTF-8">
   <title>WEB DEDE YULI</title>
   <link rel="stylesheet" href="style2.css">
-  <!-- Font Awesome untuk ikon sosial media -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    input, button {
+      margin: 5px;
+      padding: 6px;
+    }
+    .form-container {
+      margin-top: 20px;
+      background: #84b1f6;
+      padding: 10px;
+      border-radius: 8px;
+    }
+    .btn-hapus {
+      color: rgb(255, 116, 218);
+      background-color: #14e0ee;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
 
@@ -19,52 +38,66 @@
   </div>
 
   <!-- Konten Foto -->
- <div class="container-content">
-  <a href="galeri.html" class="a-content">
-    <img src="deyul.jpg" class="img-content" alt="Foto Dede Yuli">
-    <p class="p-content">Ini foto saya</p>
-  </a>
-</div>
+  <div class="container-content">
+    <a href="galeri.html" class="a-content">
+      <img src="deyul.jpg" class="img-content" alt="Foto Dede Yuli">
+      <p class="p-content">Ini foto saya</p>
+    </a>
+  </div>
 
   <!-- Footer -->
   <div class="container-footer">
     <h1 class="h1-footer">Website Ini Dibuat Oleh Dede Yuli</h1>
 
-  <!-- Tabel Siswa -->
-  <div class="container-table">
-    <table border="1">
-      <thead>
-        <tr>
-          <th>NO</th>
-          <th>NIS</th>
-          <th>NAMA</th>
-          <th>JENIS KELAMIN</th>
-          <th>ALAMAT</th>
-          <th>NO KONTAK</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>12345</td>
-          <td>Dede Yuli</td>
-          <td>Perempuan</td>
-          <td>Sindang Tanjung</td>
-          <td>08560543841</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>76542</td>
-          <td>Sinta</td>
-          <td>Perempuan</td>
-          <td>Jakarta</td>
-          <td>08523456789</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
-      <p>Follow juga akun sosial media saya:</p>
+    <!-- Tabel Siswa -->
+    <div class="container-table">
+      <table border="1" id="siswaTable">
+        <thead>
+          <tr>
+            <th>NO</th>
+            <th>NIS</th>
+            <th>NAMA</th>
+            <th>JENIS KELAMIN</th>
+            <th>ALAMAT</th>
+            <th>NO KONTAK</th>
+            <th>AKSI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>12345</td>
+            <td>Dede Yuli</td>
+            <td>Perempuan</td>
+            <td>Sindang Tanjung</td>
+            <td>08560543841</td>
+            <td><button class="btn-hapus" onclick="hapusBaris(this)">Hapus</button></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>76542</td>
+            <td>Sinta</td>
+            <td>Perempuan</td>
+            <td>Jakarta</td>
+            <td>08523456789</td>
+            <td><button class="btn-hapus" onclick="hapusBaris(this)">Hapus</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Form Tambah Data -->
+    <div class="form-container">
+      <h3>Tambah Data Siswa</h3>
+      <input type="text" id="nis" placeholder="NIS">
+      <input type="text" id="nama" placeholder="Nama">
+      <input type="text" id="jk" placeholder="Jenis Kelamin">
+      <input type="text" id="alamat" placeholder="Alamat">
+      <input type="text" id="kontak" placeholder="No Kontak">
+      <button onclick="tambahData()">Tambah</button>
+    </div>
+
+    <p>Follow juga akun sosial media saya:</p>
 
     <a href="https://www.instagram.com/dedeyuli26?igsh=MWZ6emsxdGxydDh4eQ==" target="_blank" class="social-link">
       <i class="fab fa-instagram"></i> Instagram
@@ -74,12 +107,59 @@
       <i class="fab fa-tiktok"></i> TikTok
     </a><br>
 
-    <!-- Tambahan: YouTube -->
     <a href="https://youtube.com/@dedeyuli-ws1hw?si=m5IjjlfsN59t51mY" target="_blank" class="social-link">
       <i class="fab fa-youtube"></i> YouTube
     </a><br>
+  </div>
 
+  <!-- JavaScript Tambah & Hapus -->
+  <script>
+    function tambahData() {
+      const nis = document.getElementById('nis').value;
+      const nama = document.getElementById('nama').value;
+      const jk = document.getElementById('jk').value;
+      const alamat = document.getElementById('alamat').value;
+      const kontak = document.getElementById('kontak').value;
+
+      if (!nis || !nama || !jk || !alamat || !kontak) {
+        alert("Semua kolom harus diisi!");
+        return;
+      }
+
+      const table = document.getElementById('siswaTable').getElementsByTagName('tbody')[0];
+      const row = table.insertRow();
+      const no = table.rows.length;
+
+      row.innerHTML = `
+        <td>${no}</td>
+        <td>${nis}</td>
+        <td>${nama}</td>
+        <td>${jk}</td>
+        <td>${alamat}</td>
+        <td>${kontak}</td>
+        <td><button class="btn-hapus" onclick="hapusBaris(this)">Hapus</button></td>
+      `;
+
+      document.getElementById('nis').value = "";
+      document.getElementById('nama').value = "";
+      document.getElementById('jk').value = "";
+      document.getElementById('alamat').value = "";
+      document.getElementById('kontak').value = "";
+    }
+
+    function hapusBaris(btn) {
+      const row = btn.parentNode.parentNode;
+      row.parentNode.removeChild(row);
+      updateNomor();
+    }
+
+    function updateNomor() {
+      const rows = document.querySelectorAll("#siswaTable tbody tr");
+      rows.forEach((tr, index) => {
+        tr.cells[0].innerText = index + 1;
+      });
+    }
+  </script>
 
 </body>
 </html>
-
