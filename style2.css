@@ -46,7 +46,7 @@ body {
 }
 
 .container-footer {
-  background-color: #9c27b0;
+  background-color: #dd85ed;
   color: white;
   padding: 30px 20px;
   text-align: center;
@@ -83,4 +83,20 @@ table {
 th, td {
   padding: 10px;
   border: 1px solid #ccc;
+}
+.container-kesan-pesan {
+  background-color: #f9f9f9;
+  padding: 20px;
+  margin-top: 30px;
+  border-top: 2px solid #ccc;
+  text-align: left;
+}
+
+.container-kesan-pesan h2 {
+  color: #333;
+}
+
+.container-kesan-pesan p {
+  font-size: 16px;
+  line-height: 1.6;
 }
